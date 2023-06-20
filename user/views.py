@@ -6,6 +6,7 @@ from . models import User
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -26,7 +27,7 @@ def login_user(request):
     user_form=LoginForm()
     return render(request, "user/index.html",{"user_form": user_form})
 
-
+@csrf_protect
 def register(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("homepage"))
