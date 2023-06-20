@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'linkedin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'llinkedin-clone-production.up.railway.appinkedin',
+        'NAME': 'linkedin',
         'USER': 'postgres',
         'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
         'HOST': 'containers-us-west-26.railway.app',
