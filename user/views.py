@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 
+@csrf_protect
 def login_user(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("homepage"))

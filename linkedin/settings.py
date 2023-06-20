@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7jjpf$p2e!(wsm1ju$q+gs+l4a^kibdnr&!s3dquv2#rzf@i-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["linkedin-clone-production.up.railway.app"]
+ALLOWED_HOSTS = ["linkedin-clone-production.up.railway.app","localhost"]
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'linkedin.urls'

@@ -23,8 +23,8 @@ class Posts(models.Model):
     post_id=models.AutoField(primary_key=True)
     post_name=models.CharField(max_length=100)
     post_type=models.CharField(max_length=20)
-    images=ArrayField(models.ImageField())
-    comment_id=ArrayField(models.IntegerField())
+    images=ArrayField(models.ImageField(),blank=True,null=True)
+    comment_id=ArrayField(models.IntegerField(),blank=True,null=True)
 
 class Skills(models.Model):
     skill_id=models.AutoField(primary_key=True)
