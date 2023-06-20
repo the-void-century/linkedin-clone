@@ -1,0 +1,125 @@
+.main-container{
+    display:flex;
+    align-items: center;
+    height:100%;
+}
+.navbar-container img{
+    height:100%;
+  }
+html,body{
+    height:100vh;
+}
+div{
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.container {
+    max-width: 400px;
+    margin-left:20%;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2867B2;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #2867B2;
+    outline: none;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #2867B2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0A437C;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    font-size: 24px;
+    color: #2867B2;
+    text-decoration: none;
+  }
+  
+  .navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-menu li {
+    margin-right: 20px;
+  }
+  
+  .navbar-menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .navbar-menu a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .navbar-menu a:hover {
+    color: #2867B2;
+  }

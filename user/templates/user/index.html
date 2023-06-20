@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'login/register.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-logo" href="#">LinkedIn</a>
+            <ul class="navbar-menu">
+            <li><a href="#">Articles</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href={% url 'register' %}>Register</a></li>
+            </ul>
+        </div>
+    </nav>
+  <div class="main-container">
+    <div class="container">
+      <h2>Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_username">Username:</label>
+          {{ user_form.username }}
+          {% for error in form.username.errors %}
+            <p class="error">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          <label for="id_password">Password:</label>
+          {{ user_form.password }}
+          {% for error in form.password.errors %}
+            <p class="error">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
