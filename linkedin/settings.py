@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7jjpf$p2e!(wsm1ju$q+gs+l4a^kibdnr&!s3dquv2#rzf@i-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'linkedin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'linkedin',
+        'NAME': 'llinkedin-clone-production.up.railway.appinkedin',
         'USER': 'postgres',
         'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
         'HOST': 'containers-us-west-26.railway.app',
