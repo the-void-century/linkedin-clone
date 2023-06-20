@@ -78,10 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'linkedin',
-        'USER': 'utsav_django',
-        'PASSWORD': 'xargs@#',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'postgres',
+        'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
+        'HOST': 'containers-us-west-26.railway.app',
+        'PORT': '6177',
     }
 }
 
