@@ -85,6 +85,16 @@ DATABASES = {
         'PORT': '6177',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'linkedin',
+#         'USER': 'utsav_django',
+#         'PASSWORD': 'xargs@#',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {

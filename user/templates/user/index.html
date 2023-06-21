@@ -26,17 +26,20 @@
         <div class="form-group">
           <label for="id_username">Username:</label>
           {{ user_form.username }}
-          {% for error in form.username.errors %}
+          {% for error in user_form.username.errors %}
             <p class="error">{{ error }}</p>
           {% endfor %}
         </div>
         <div class="form-group">
           <label for="id_password">Password:</label>
           {{ user_form.password }}
-          {% for error in form.password.errors %}
+          {% for error in user_form.password.errors %}
             <p class="error">{{ error }}</p>
           {% endfor %}
         </div>
+        {% if error %}
+        <div class="error"><p>{{ error }}</p></div>
+        {% endif %}
         <button type="submit">Login</button>
       </form>
     </div>

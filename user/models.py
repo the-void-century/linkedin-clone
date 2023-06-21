@@ -32,11 +32,11 @@ class Skills(models.Model):
 
 class User(AbstractUser):
     user_id=models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30,unique=True)
-    first_name = models.CharField(max_length=30,blank=True,null=True)
-    last_name = models.CharField(max_length=30,blank=True,null=True)
-    email = models.EmailField(max_length=30,unique=True)
-    password = models.CharField(max_length=100)
+    username = models.CharField(max_length=100,unique=True)
+    first_name = models.CharField(max_length=100,blank=True,null=True)
+    last_name = models.CharField(max_length=100,blank=True,null=True)
+    email = models.EmailField(max_length=100,unique=True)
+    password = models.CharField(max_length=200)
     date_of_birth = models.DateField(blank=True,null=True)
     profile_picture = models.ImageField(blank=True,null=True)
     headline = models.CharField(max_length=100,blank=True,null=True)

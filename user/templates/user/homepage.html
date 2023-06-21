@@ -21,7 +21,9 @@
     <div class="profile">
       <img src="{% static 'images/base_wall.jpeg' %}" class="im">
       <div class="profile-head">
-        <div class="profile-picture"></div>
+        <div class="profile-picture">
+            <img src="{% static 'images/average_user.jpeg' %}">
+        </div>
           <h1>{{ user.first_name }} {{ user.last_name }}</h1>
           <h3>{{ user.headline }}</h3>
           <p>{{ user.location }}</p>
@@ -31,9 +33,9 @@
 
     <div class="details-container">
         <h2>Experience</h2>
-        {% for experience in user.experiences %}
-            <h4>{{ experience.title }}</h4>
-            <p>{{ experience.company }}</p>
+        {% for experience in experiences %}
+            <h4>{{ experience.job_title }}</h4>
+            <p>{{ experience.company_name }}</p>
             <p>{{ experience.start_date }} - {{ experience.end_date }}</p>
             <p>{{ experience.description }}</p>
         {% empty %}
@@ -43,11 +45,11 @@
 
     <div class="details-container">
         <h2>Education</h2>
-        {% for education in user.educations %}
-            <h4>{{ education.degree }}</h4>
-            <p>{{ education.school }}</p>
+        {% for education in educations %}
+            <h4>{{ education.education_title }}</h4>
+            <p>{{ education.insitution_name }}</p>
             <p>{{ education.start_date }} - {{ education.end_date }}</p>
-            <p>{{ education.field_of_study }}</p>
+            <p>Score: {{ education.score }} CGPA</p>
         {% empty %}
             <p>No education information available.</p>
         {% endfor %}
@@ -56,8 +58,8 @@
     <div class="details-container">
         <h2>Skills</h2>
         <ul>
-            {% for skill in user.skills %}
-                <li>{{ skill }}</li>
+            {% for skill in skills %}
+                <li>{{ skill.skill_name }}</li>
             {% empty %}
                 <p>No skills to display.</p>
             {% endfor %}

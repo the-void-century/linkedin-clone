@@ -12,6 +12,10 @@ html,body{
 div{
   font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
+.error{
+  font-size:small;
+  color:red;
+}
 .container {
     max-width: 400px;
     margin-left:20%;

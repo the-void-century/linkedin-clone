@@ -26,42 +26,42 @@
       <div class="form-group">
         <label for="id_username">Username:</label>
         {{ user_form.username }}
-        {% for error in form.username.errors %}
+        {% for error in user_form.username.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
       <div class="form-group">
         <label for="id_first_name">First Name:</label>
         {{ user_form.first_name }}
-        {% for error in form.first_name.errors %}
+        {% for error in user_form.first_name.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
       <div class="form-group">
         <label for="id_last_name">Last Name:</label>
         {{ user_form.last_name }}
-        {% for error in form.last_name.errors %}
+        {% for error in user_form.last_name.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
       <div class="form-group">
         <label for="id_email">Email:</label>
         {{ user_form.email }}
-        {% for error in form.email.errors %}
+        {% for error in user_form.email.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
       <div class="form-group">
         <label for="id_password">Password:</label>
         {{ user_form.password }}
-        {% for error in form.password.errors %}
+        {% for error in user_form.password.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
       <div class="form-group">
         <label for="id_password2">Repeat Password:</label>
         {{ user_form.password2 }}
-        {% for error in form.password2.errors %}
+        {% for error in user_form.password2.errors %}
           <p class="error">{{ error }}</p>
         {% endfor %}
       </div>
