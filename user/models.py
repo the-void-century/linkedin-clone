@@ -38,10 +38,36 @@ class User(AbstractUser):
     email = models.EmailField(max_length=100,unique=True)
     password = models.CharField(max_length=200)
     date_of_birth = models.DateField(blank=True,null=True)
-    profile_picture = models.ImageField(blank=True,null=True)
+    profile_picture = models.ImageField(blank=True,null=True,upload_to="profile_picture")
+    wall = models.ImageField(blank=True,null=True,upload_to="wall")
     headline = models.CharField(max_length=100,blank=True,null=True)
     summary = models.TextField(max_length=1000,blank=True,null=True)
     location = models.CharField(max_length=100)
     education_id=ArrayField(models.IntegerField(),blank=True,null=True)
     job_id=ArrayField(models.IntegerField(),blank=True,null=True)
     skill_id = ArrayField(models.IntegerField(),blank=True,null=True)
+    project_id=ArrayField(models.IntegerField(),blank=True,null=True)
+
+class Project(models.Model):
+    project_id=models.AutoField(primary_key=True)
+    project_title=models.CharField(max_length=100)
+    project_domain=models.CharField(max_length=100)
+
+class Connection(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_connections')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_connections')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class ChatRoom(models.Model):
+    name = models.CharField(max_length=100)
+
+
+class Message(models.Model):
+    chat_room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE, related_name='messages')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}: {self.content}"

@@ -1,13 +1,14 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.urls import reverse
 from django.template import loader
-from . models import User,Job,Education,Skills
-from .forms import LoginForm, UserRegistrationForm
+from . models import User,Job,Education,Skills,ChatRoom,Message
+from .forms import LoginForm, UserRegistrationForm, UserEditForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 import json
+from django.contrib import messages
 
 @csrf_protect
 def login_user(request):
@@ -49,9 +50,79 @@ def register(request):
 
 @login_required(login_url=login_user)
 def homepage(request):
-    if request.method == "POST":#creating a new post
-        pass
+    user=request.user
+    if request.method == "POST":
+        user_form=UserEditForm(request.POST,instance=object)
+        #print(user_form)
+        if user_form.is_valid():
+            user_form.save()
+        else:
+            print(user_form.errors)
+            messages.error(request, 'Error updating your profile')
     current_user=User.objects.get(user_id=request.user.user_id)
+    x=current_user.__dict__
+    # print(x)
+    experiences=[]
+    educations=[]
+    skills=[]
+    for i in x['job_id']:
+        experiences.append(Job.objects.get(job_id=i).__dict__)
+        educations.append(Education.objects.get(education_id=i).__dict__)
+        skills.append(Skills.objects.get(skill_id=i).__dict__)
+    x['educations']=educations
+    x['experiences']=experiences
+    x['skills']=skills
+    # print(x)
+    return render(request,"user/homepage.html",x)
+
+@login_required(login_url=login_user)
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url=login_user)
+def people(request):
+    user_list=list(User.objects.all())
+    if request.method == 'POST':
+        pass
+    for user in user_list:
+        user=user.__dict__
+        print(user['profile_picture'])
+    print(user_list)
+    return render(request,"user/list_users.html",{"user_list":user_list})
+
+@login_required(login_url=login_user)
+def jobs(request):
+    return HttpResponse("List of job postings(Hopefully)")
+
+@login_required(login_url=login_user)
+def update_profile(request):
+    user_form=UserEditForm()
+    return render(request,"user/update_profile.html",{"user_form":user_form,"first_name":request.user.first_name})
+
+@login_required(login_url=login_user)
+def chat_room(request, chat_room_id):
+    chat_room = ChatRoom.objects.get(id=chat_room_id)
+    messages = Message.objects.filter(chat_room_id=chat_room_id).order_by('timestamp')
+    context = {'chat_room_id': chat_room_id, 'messages': messages}
+    return render(request, 'user/chat_room.html', context)
+
+@login_required(login_url=login_user)
+def send_message(request, chat_room_id):
+    if request.method == 'POST':
+        content = request.POST.get('message', '').strip()
+        if not content:
+            return HttpResponseBadRequest("Message content cannot be empty.")
+        chat_room = get_object_or_404(ChatRoom, id=chat_room_id)
+        user = request.user
+        message = Message.objects.create(chat_room=chat_room, user=user, content=content)
+        return redirect('chat_room', chat_room_id=chat_room_id)
+    return HttpResponseBadRequest("Invalid request method.")
+
+def random_view(request,new_user_id):
+    if request.method == "POST":
+        pass
+    current_user=User.objects.get(user_id=new_user_id)
     x=current_user.__dict__
     experiences=[]
     educations=[]
@@ -63,10 +134,5 @@ def homepage(request):
     x['educations']=educations
     x['experiences']=experiences
     x['skills']=skills
-    #print(x)
-    return render(request,"user/homepage.html",x)
-
-@login_required(login_url=login_user)
-def logout_user(request):
-    logout(request)
-    return redirect('login')
+    print(x)
+    return render(request,"user/different_user.html",x)

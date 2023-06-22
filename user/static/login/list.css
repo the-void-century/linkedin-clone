@@ -1,0 +1,39 @@
+.page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-card{
+    height:10rem;
+    width:20rem;
+    background-color: white;
+    border-radius: 25px;
+    margin:3rem;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #0a66c2;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 2rem;
+  }
+
+  .profile--picture{
+    border-radius:50%;
+    height:3rem;
+    width:3rem;
+    background-color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .profile--picture img{
+    height:3rem;
+    width:3rem;
+  }
