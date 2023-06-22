@@ -119,6 +119,7 @@ def send_message(request, chat_room_id):
         return redirect('chat_room', chat_room_id=chat_room_id)
     return HttpResponseBadRequest("Invalid request method.")
 
+@login_required(login_url=login_user)
 def random_view(request,new_user_id):
     if request.method == "POST":
         pass
