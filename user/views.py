@@ -44,9 +44,9 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            return render(request, "user/register_done.html",{"new_user":new_user})
+            return HttpResponseRedirect(reverse("login_user"))
         else:
-            return render(request, "user/registration.html",{"user_form":user_form})
+            return render(request, "user/registration.html",{"user_form":user_form,"error":"There was an error"})
     return render(request, "user/registration.html",{"user_form":user_form})
 
 @login_required(login_url=login_user)
