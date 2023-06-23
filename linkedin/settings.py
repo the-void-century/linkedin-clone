@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
-    'channels'
+    'channels',
+    'friendship'
 ]
 
 ASGI_APPLICATION = 'educa.routing.application'
@@ -73,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -84,26 +89,26 @@ CSRF_TRUSTED_ORIGINS=["https://linkedin-clone-production.up.railway.app"]
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'linkedin',
-        'USER': 'postgres',
-        'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
-        'HOST': 'containers-us-west-26.railway.app',
-        'PORT': '6177',
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'linkedin',
-#         'USER': 'utsav_django',
-#         'PASSWORD': 'xargs@#',
-#         'HOST': 'localhost',
-#         'PORT': '',
+#         'USER': 'postgres',
+#         'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
+#         'HOST': 'containers-us-west-26.railway.app',
+#         'PORT': '6177',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'linkedin',
+        'USER': 'utsav_django',
+        'PASSWORD': 'xargs@#',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # DATABASES = {
 #     'default': {

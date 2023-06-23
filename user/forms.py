@@ -1,5 +1,5 @@
 from django import forms
-from . models import User
+from . models import User,JobPost
 
 class LoginForm(forms.Form):
     username= forms.CharField(max_length=100)
@@ -27,3 +27,8 @@ class UserEditForm(forms.ModelForm):
                 'last_name','date_of_birth'
                 ,'profile_picture','wall','headline','summary'
                 ,'location')
+    
+class JobPostForm(forms.ModelForm):
+    class Meta:
+        model=JobPost
+        fields=('job_title','company_title','job_summary','apply_link','location')

@@ -6,8 +6,8 @@
 }
 
 .profile-card{
-    height:10rem;
-    width:20rem;
+    height:20rem;
+    width:30rem;
     background-color: white;
     border-radius: 25px;
     margin:3rem;
@@ -26,14 +26,16 @@ input[type=button], input[type=submit], input[type=reset] {
 
   .profile--picture{
     border-radius:50%;
-    height:3rem;
-    width:3rem;
+    height:11rem;
+    width:11rem;
     background-color:black;
     display: flex;
     justify-content: center;
+    border-radius: 50%;
     align-items: center;
   }
   .profile--picture img{
-    height:3rem;
-    width:3rem;
+    height:10rem;
+    width:10rem;
+    border-radius: 50%;
   }

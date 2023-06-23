@@ -21,6 +21,8 @@
 }
 .dropbtn {
   border: none;
+  background-color: white;
+  font-family: 'Helvetica', Arial, Helvetica, sans-serif;
 }
 
 .dropdown {
@@ -135,7 +137,7 @@ body{
   justify-content: space-around;
 }
 .details-container{
-  width:50%;
+  width:48%;
   height:200px;
   background-color: white;
   border-radius: 20px;

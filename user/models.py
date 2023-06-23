@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser
 
+def user_directory_path(instance, filename):
+    return "user_{0}/{1}".format(instance.user.id, filename)
+
 class Job(models.Model):
     job_id=models.AutoField(primary_key=True)
     job_title=models.CharField(max_length=100)
@@ -38,15 +41,15 @@ class User(AbstractUser):
     email = models.EmailField(max_length=100,unique=True)
     password = models.CharField(max_length=200)
     date_of_birth = models.DateField(blank=True,null=True)
-    profile_picture = models.ImageField(blank=True,null=True,upload_to="profile_picture")
-    wall = models.ImageField(blank=True,null=True,upload_to="wall")
+    profile_picture = models.ImageField(blank=True,null=True,upload_to="user/profile_picture")
+    wall = models.ImageField(blank=True,null=True,upload_to="user/wall")
     headline = models.CharField(max_length=100,blank=True,null=True)
     summary = models.TextField(max_length=1000,blank=True,null=True)
     location = models.CharField(max_length=100)
     education_id=ArrayField(models.IntegerField(),blank=True,null=True)
-    job_id=ArrayField(models.IntegerField(),blank=True,null=True)
-    skill_id = ArrayField(models.IntegerField(),blank=True,null=True)
-    project_id=ArrayField(models.IntegerField(),blank=True,null=True)
+    job_id=ArrayField(models.IntegerField(),default=list)
+    skill_id = ArrayField(models.IntegerField(),default=list)
+    project_id=ArrayField(models.IntegerField(),default=list)
 
 class Project(models.Model):
     project_id=models.AutoField(primary_key=True)
@@ -71,3 +74,12 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.user.username}: {self.content}"
+    
+class JobPost(models.Model):
+    job_id=models.AutoField(primary_key=True)
+    job_title=models.CharField(max_length=100)
+    posted_by=models.ForeignKey(User, on_delete=models.CASCADE,default=None)
+    company_title=models.CharField(max_length=100,default="Not Disclosed")
+    job_summary=models.TextField()
+    apply_link = models.URLField(max_length=200)
+    location=models.CharField(max_length=100)

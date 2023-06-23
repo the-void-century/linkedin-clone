@@ -1,0 +1,39 @@
+*{
+    font-family: "Helvetica Neue";
+}
+.job-card{
+    margin-top:1%;
+    height:10rem;
+    width:20rem;
+    padding:3%;
+    background-color:white;
+    border-radius:25px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+}
+.job-company{
+    font-size: medium;
+}
+.job-title{
+    font-size: large;
+}
+.job-summary{
+    font-size: small;
+}
+.job-location{
+    font-size:small;
+    color:gray;
+}
+.job-link{
+    text-decoration: none;
+    line-height:1%;
+    color:white;
+    height:2rem;
+    width:5rem;
+    background-color:green;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:25px;
+}

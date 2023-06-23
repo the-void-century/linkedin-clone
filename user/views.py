@@ -2,13 +2,14 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.urls import reverse
 from django.template import loader
-from . models import User,Job,Education,Skills,ChatRoom,Message
-from .forms import LoginForm, UserRegistrationForm, UserEditForm
+from . models import User,Job,Education,Skills,ChatRoom,Message,JobPost
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, JobPostForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 import json
 from django.contrib import messages
+from friendship.models import Friend, Follow, Block
 
 @csrf_protect
 def login_user(request):
@@ -49,6 +50,7 @@ def register(request):
     return render(request, "user/registration.html",{"user_form":user_form})
 
 @login_required(login_url=login_user)
+@csrf_protect
 def homepage(request):
     user=request.user
     if request.method == "POST":
@@ -76,31 +78,36 @@ def homepage(request):
     return render(request,"user/homepage.html",x)
 
 @login_required(login_url=login_user)
+@csrf_protect
 def logout_user(request):
     logout(request)
     return redirect('login')
 
 @login_required(login_url=login_user)
+@csrf_protect
 def people(request):
     user_list=list(User.objects.all())
     if request.method == 'POST':
         pass
+    all_users=[]
     for user in user_list:
-        user=user.__dict__
-        print(user['profile_picture'])
-    print(user_list)
-    return render(request,"user/list_users.html",{"user_list":user_list})
+        if user.__dict__['username']!='admin':
+            all_users.append(user)
+    return render(request,"user/list_users.html",{"user_list":all_users})
 
 @login_required(login_url=login_user)
+@csrf_protect
 def jobs(request):
     return HttpResponse("List of job postings(Hopefully)")
 
 @login_required(login_url=login_user)
+@csrf_protect
 def update_profile(request):
     user_form=UserEditForm()
     return render(request,"user/update_profile.html",{"user_form":user_form,"first_name":request.user.first_name})
 
 @login_required(login_url=login_user)
+@csrf_protect
 def chat_room(request, chat_room_id):
     chat_room = ChatRoom.objects.get(id=chat_room_id)
     messages = Message.objects.filter(chat_room_id=chat_room_id).order_by('timestamp')
@@ -108,6 +115,7 @@ def chat_room(request, chat_room_id):
     return render(request, 'user/chat_room.html', context)
 
 @login_required(login_url=login_user)
+@csrf_protect
 def send_message(request, chat_room_id):
     if request.method == 'POST':
         content = request.POST.get('message', '').strip()
@@ -120,6 +128,7 @@ def send_message(request, chat_room_id):
     return HttpResponseBadRequest("Invalid request method.")
 
 @login_required(login_url=login_user)
+@csrf_protect
 def random_view(request,new_user_id):
     if request.method == "POST":
         pass
@@ -136,4 +145,25 @@ def random_view(request,new_user_id):
     x['experiences']=experiences
     x['skills']=skills
     print(x)
-    return render(request,"user/different_user.html",x)
+    return render(request,"user/different_user.html",x)\
+
+@login_required(login_url=login_user)
+@csrf_protect
+def create_job_post(request):
+    job_form= JobPostForm()
+    if request.method == 'POST':
+        job_form = JobPostForm(request.POST)
+        print("YEs,but not valid")
+        if job_form.is_valid():
+            print("Yes")
+            new_job = job_form.save(commit=False)
+            new_job.posted_by=request.user
+            new_job.save()
+            return render(request, "user/list_jobs.html",{"new_job":new_job,"message":"Job created successfully"})
+        else:
+            return render(request, "user/homepage.html",{"message":"There was some problem creating the job"})
+    return render(request, "user/job_create.html",{"job_form":job_form})
+
+def list_jobs(request):
+    all_jobs=list(JobPost.objects.all())
+    return render(request,"user/list_jobs.html",{"job_list":all_jobs})

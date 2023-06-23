@@ -13,13 +13,13 @@
         <ul class="navbar-menu">
         <li><a href={% url 'homepage' %}>Home</a></li>
         <li><a href={% url 'people' %}>People</a></li>
-        <li><a href={% url 'jobs' %}>Jobs</a></li>
+        <li><a href={% url 'list_jobs' %}>Jobs</a></li>
         <div class="dropdown">
             <button class="dropbtn">{{ user.first_name }}</button>
             <div class="dropdown-content">
                 <a href={% url 'update' %}>Edit Profile</a>
                 <a href={% url 'logout' %}>Logout</a>
-              <a href="#">Link 3</a>
+              <a href={% url 'create_job_post' %}>Post Jobs</a>
             </div>
           </div>
         </ul>
@@ -30,10 +30,10 @@
       </div>
     <div class="main-container">
         <div class="profile">
-        <img src="{% static 'images/base_wall.jpeg' %}" class="im">
+            <img src="{{ user.wall.url }}">
         <div class="profile-head">
-            <div class="profile-picture">
-                <img src="{% static 'images/average_user.jpeg' %}">
+            <div class="profile-picture">   
+                <img src="{{ user.profile_picture.url }}">
             </div>
             <h1>{{ user.first_name }} {{ user.last_name }}</h1>
             <h3>{{ user.headline }}</h3>

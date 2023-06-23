@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'login/register.css' %}">
+  <link rel="stylesheet" href="{% static 'login/homepage.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-logo" href="#">LinkedIn</a>
+            <ul class="navbar-menu">
+            <li><a href={% url 'homepage' %}>Home</a></li>
+            <li><a href={% url 'people' %}>People</a></li>
+            <li><a href={% url 'jobs' %}>Jobs</a></li>
+            <div class="dropdown">
+                <button class="dropbtn">{{ user.first_name }}</button>
+                <div class="dropdown-content">
+                    <a href={% url 'update' %}>Edit Profile</a>
+                    <a href={% url 'logout' %}>Logout</a>
+                  <a href={% url 'create_job_post' %}>Post Jobs</a>
+                </div>
+              </div>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-container">
+  <div class="container">
+    <h2>Create A New Job</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">Job Title:</label>
+        {{ job_form.job_title }}
+        {% for error in job_form.job_title.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="id_username">Company Title:</label>
+        {{ job_form.company_title }}
+        {% for error in job_form.comapny_title.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="id_first_name">Job Summary:</label>
+        {{ job_form.job_summary }}
+        {% for error in job_form.job_summary.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="id_last_name">Enter the job portal URL</label>
+        {{ job_form.apply_link }}
+        {% for error in job_form.apply_link.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="id_email">Location:</label>
+        {{ job_form.location }}
+        {% for error in job_form.location.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <button type="submit">Create Job</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

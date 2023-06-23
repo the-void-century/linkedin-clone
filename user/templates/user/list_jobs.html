@@ -8,6 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'login/homepage.css' %}">
     <link rel="stylesheet" href="{% static 'login/list.css' %}">
+        <link rel="stylesheet" href="{% static 'login/jobs.css' %}">
+    
 </head>
 <body>
     <nav class="navbar">
@@ -30,15 +32,13 @@
     </nav>
     
     <div class="page-container">
-    {% for user in user_list %}
-    <div class="profile-card">
-        <div class="profile--picture"><img src="{{ user.profile_picture.url }}"></div>
-        <div class="name">{{ user.first_name }} {{ user.last_name }}</div>
-        <div class="headline">{{ user.headline }}</div>
-        <form method="post">
-            {% csrf_token %}
-            <input type="submit" value="connect" />
-        </form>        
+    {% for job in job_list %}
+    <div class="job-card">
+        <div class="job-title">{{ job.job_title }}</div>
+        <div class="job-company">{{ job.company_title }}</div>
+        <div class="job-summary">{{ job.job_summary }}</div>
+        <div class="job-location">{{job.location}}</div>
+        <div class="job-link"><a href={{ job.apply_link }}> Apply </a></div>    
     </div>
     {% endfor %}
 </div>
