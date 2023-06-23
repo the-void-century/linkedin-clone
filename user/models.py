@@ -51,6 +51,18 @@ class User(AbstractUser):
     skill_id = ArrayField(models.IntegerField(),default=list)
     project_id=ArrayField(models.IntegerField(),default=list)
 
+    def get_profile_url(self):
+            try:
+                 return self.profile_picture.url
+            except IOError:
+                 return None
+
+    def get_wall_url(self):
+            try:
+                 return self.wall.url
+            except IOError:
+                 return None
+
 class Project(models.Model):
     project_id=models.AutoField(primary_key=True)
     project_title=models.CharField(max_length=100)

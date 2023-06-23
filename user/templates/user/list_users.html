@@ -32,7 +32,13 @@
     <div class="page-container">
     {% for user in user_list %}
     <div class="profile-card">
-        <div class="profile--picture"><img src="{{ user.profile_picture.url }}"></div>
+        <div class="profile--picture">
+            {% if user.wall.get_profile_url %}
+                <img src="{{ user.wall.get_profile_url }}" />
+            {% else %}
+                <img src="{% static 'images/average_user.png' %}" />
+            {% endif %}
+        </div>
         <div class="name">{{ user.first_name }} {{ user.last_name }}</div>
         <div class="headline">{{ user.headline }}</div>
         <form method="post">

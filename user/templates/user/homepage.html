@@ -30,11 +30,20 @@
       </div>
     <div class="main-container">
         <div class="profile">
-            <img src="{{ user.wall.url }}">
+            {% if user.wall.get_wall_url %}
+                <img src="{{ user.wall.get_wall_url }}" />
+            {% else %}
+                <img src="{% static 'images/base_wall.jpeg' %}" />
+            {% endif %}
         <div class="profile-head">
             <div class="profile-picture">   
-                <img src="{{ user.profile_picture.url }}">
+                {% if user.wall.get_profile_url %}
+                <img src="{{ user.wall.get_profile_url }}" />
+            {% else %}
+                <img src="{% static 'images/average_user.png' %}" />
+            {% endif %}
             </div>
+            
             <h1>{{ user.first_name }} {{ user.last_name }}</h1>
             <h3>{{ user.headline }}</h3>
             <p>{{ user.location }}</p>

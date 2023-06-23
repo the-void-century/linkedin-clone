@@ -21,7 +21,7 @@
     <div class="main-container">
   <div class="container">
     <h2>Welcome to LinkedIn</h2>
-    <form method="post">
+    <form method="post" enctype='multipart/form-data'>
       {% csrf_token %}
       <div class="form-group">
         <label for="id_username">Username:</label>

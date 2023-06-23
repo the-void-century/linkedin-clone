@@ -44,7 +44,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            return HttpResponseRedirect(reverse("login_user"))
+            return HttpResponseRedirect(reverse("login"))
         else:
             return render(request, "user/registration.html",{"user_form":user_form,"error":"There was an error"})
     return render(request, "user/registration.html",{"user_form":user_form})
@@ -112,7 +112,7 @@ def chat_room(request, chat_room_id):
     chat_room = ChatRoom.objects.get(id=chat_room_id)
     messages = Message.objects.filter(chat_room_id=chat_room_id).order_by('timestamp')
     context = {'chat_room_id': chat_room_id, 'messages': messages}
-    return render(request, 'user/chat_room.html', context)
+    return render(request, 'user/cha••••••t_room.html', context)
 
 @login_required(login_url=login_user)
 @csrf_protect
