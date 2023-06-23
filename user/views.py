@@ -159,9 +159,9 @@ def create_job_post(request):
             new_job = job_form.save(commit=False)
             new_job.posted_by=request.user
             new_job.save()
-            return render(request, "user/list_jobs.html",{"new_job":new_job,"message":"Job created successfully"})
+            return HttpResponseRedirect(reverse("list_jobs"))
         else:
-            return render(request, "user/homepage.html",{"message":"There was some problem creating the job"})
+            return HttpResponseRedirect(reverse("homepage"))
     return render(request, "user/job_create.html",{"job_form":job_form})
 
 def list_jobs(request):

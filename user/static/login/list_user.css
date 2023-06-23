@@ -11,14 +11,17 @@
     background-color: white;
     border-radius: 25px;
     margin:3rem;
-    
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    font-family:"Helvetica Neue";
 }
 
 input[type=button], input[type=submit], input[type=reset] {
     background-color: #0a66c2;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding:10%;
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
@@ -27,16 +30,25 @@ input[type=button], input[type=submit], input[type=reset] {
 
   .profile--picture{
     border-radius:50%;
-    height:11rem;
-    width:11rem;
-    background-color:black;
+    height:10rem;
+    width:10rem;
+    background-color: white;
     display: flex;
     justify-content: center;
     border-radius: 50%;
     align-items: center;
+    width:50%;
   }
   .profile--picture img{
     height:10rem;
     width:10rem;
     border-radius: 50%;
+  }
+  .user-detail{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    align-items:center;
+    width:50%;
+    font-family:"Helvetica Neue";
   }

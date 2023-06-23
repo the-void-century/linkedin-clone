@@ -24,8 +24,7 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model= User
         fields=('first_name',
-                'last_name','date_of_birth'
-                ,'profile_picture','wall','headline','summary'
+                'last_name','date_of_birth','headline','summary'
                 ,'location')
     
 class JobPostForm(forms.ModelForm):

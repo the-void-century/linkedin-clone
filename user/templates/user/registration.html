@@ -52,20 +52,6 @@
         {% endfor %}
       </div>
       <div class="form-group">
-        <label for="id_email">Profile Picture</label>
-        {{ user_form.profile_picture }}
-        {% for error in user_form.profile_picture.errors %}
-          <p class="error">{{ error }}</p>
-        {% endfor %}
-      </div>
-      <div class="form-group">
-        <label for="id_email">Wall:</label>
-        {{ user_form.wall }}
-        {% for error in user_form.wall.errors %}
-          <p class="error">{{ error }}</p>
-        {% endfor %}
-      </div>
-      <div class="form-group">
         <label for="id_password">Password:</label>
         {{ user_form.password }}
         {% for error in user_form.password.errors %}
