@@ -89,26 +89,26 @@ CSRF_TRUSTED_ORIGINS=["https://linkedin-clone-production.up.railway.app"]
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'linkedin',
-#         'USER': 'postgres',
-#         'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
-#         'HOST': 'containers-us-west-26.railway.app',
-#         'PORT': '6177',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'linkedin',
-        'USER': 'utsav_django',
-        'PASSWORD': 'xargs@#',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'postgres',
+        'PASSWORD': 'N5kjtRAVb7lG3QvAMoSD',
+        'HOST': 'containers-us-west-26.railway.app',
+        'PORT': '6177',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'linkedin',
+#         'USER': 'utsav_django',
+#         'PASSWORD': 'xargs@#',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
