@@ -6,7 +6,7 @@
 }
 
 .profile-card{
-    height:20rem;
+    height:15rem;
     width:30rem;
     background-color: white;
     border-radius: 25px;
@@ -15,9 +15,26 @@
     justify-content: space-around;
     align-items:center;
     font-family:"Helvetica Neue";
+    border: 1px solid gray;
+    box-shadow: 1px;
+}
+.profile-card img{
+    border:1px solid gray;
 }
 
-input[type=button], input[type=submit], input[type=reset] {
+.already-connected a {
+  background-color: gray;
+  border: none;
+  color: white;
+  padding:5%;
+  width:60%;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 2rem;
+}
+
+.not-connected a {
     background-color: #0a66c2;
     border: none;
     color: white;
@@ -26,6 +43,7 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 2rem;
+    width:60%;
   }
 
   .profile--picture{
@@ -50,5 +68,12 @@ input[type=button], input[type=submit], input[type=reset] {
     justify-content: space-around;
     align-items:center;
     width:50%;
+    height:100%;
     font-family:"Helvetica Neue";
+  }
+  p{
+    font-family: "Helvetica Neue";
+    font-size:x-large;
+    margin-top:2%;
+    margin-bottom:2%;
   }

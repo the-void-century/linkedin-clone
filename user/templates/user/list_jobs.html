@@ -30,15 +30,16 @@
             </ul>
         </div>
     </nav>
-    
     <div class="page-container">
+        <p>Job portal</p>
     {% for job in job_list %}
     <div class="job-card">
         <div class="job-title">{{ job.job_title }}</div>
         <div class="job-company">{{ job.company_title }}</div>
         <div class="job-summary">{{ job.job_summary }}</div>
         <div class="job-location">{{job.location}}</div>
-        <div class="job-link"><a href={{ job.apply_link }}> Apply </a></div>    
+        <div class="posted-by"> Posted By: {{ job.posted_by.first_name }} {{ job.posted_by.last_name }}</div>
+        <div class="job-link"><a href={{ job.apply_link }} target="_blank"> Apply </a></div>    
     </div>
     {% endfor %}
 </div>

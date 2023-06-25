@@ -24,10 +24,15 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model= User
         fields=('first_name',
-                'last_name','date_of_birth','headline','summary'
+                'last_name','date_of_birth','profile_picture','wall','headline','summary'
                 ,'location')
     
 class JobPostForm(forms.ModelForm):
     class Meta:
         model=JobPost
         fields=('job_title','company_title','job_summary','apply_link','location')
+
+# class ConnectionRequest(forms.ModelForm):
+#     class Meta:
+#         model=User
+#         fields=(User)

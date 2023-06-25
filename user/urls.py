@@ -18,6 +18,8 @@ urlpatterns = [
     path('different/<int:new_user_id>',views.random_view,name='random_view'),
     path('friendship/', include('friendship.urls')),
     path('job',views.create_job_post,name='create_job_post'),
-    path('joblist',views.list_jobs,name='list_jobs')
+    path('joblist',views.list_jobs,name='list_jobs'),
+    path('connectWith/<int:user_id>',views.connect,name='connection'),
+    path('connectedPeople',views.connected_list,name='connectedPeople')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

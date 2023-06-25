@@ -2,14 +2,14 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.urls import reverse
 from django.template import loader
-from . models import User,Job,Education,Skills,ChatRoom,Message,JobPost
+from . models import User,Job,Education,Skills,ChatRoom,Message,JobPost, Connection
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, JobPostForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 import json
 from django.contrib import messages
-from friendship.models import Friend, Follow, Block
+from friendship.models import Friend, Follow, Block,FriendshipRequest
 
 @csrf_protect
 def login_user(request):
@@ -30,6 +30,10 @@ def login_user(request):
             else:
                 return render(request,"user/index.html",{"error":"Invalid username or password","user_form": user_form})
     return render(request, "user/index.html",{"user_form": user_form})
+
+
+def search_job(title,location,domain,type,sort_order,company):
+    pass
 
 @csrf_protect
 def register(request):
@@ -67,10 +71,13 @@ def homepage(request):
     experiences=[]
     educations=[]
     skills=[]
-    for i in x['job_id']:
-        experiences.append(Job.objects.get(job_id=i).__dict__)
-        educations.append(Education.objects.get(education_id=i).__dict__)
-        skills.append(Skills.objects.get(skill_id=i).__dict__)
+    try:
+        for i in x['job_id']:
+            experiences.append(Job.objects.get(job_id=i).__dict__)
+            educations.append(Education.objects.get(education_id=i).__dict__)
+            skills.append(Skills.objects.get(skill_id=i).__dict__)
+    except:
+        pass
     x['educations']=educations
     x['experiences']=experiences
     x['skills']=skills
@@ -87,13 +94,13 @@ def logout_user(request):
 @csrf_protect
 def people(request):
     user_list=list(User.objects.all())
-    if request.method == 'POST':
-        pass
     all_users=[]
     for user in user_list:
         if user.__dict__['username']!='admin':
             all_users.append(user)
-    return render(request,"user/list_users.html",{"user_list":all_users})
+    user=User.objects.get(user_id=request.user.user_id)
+    friends = user.friendships.all()
+    return render(request,"user/list_users.html",{"user_list":all_users,"friends":friends})
 
 @login_required(login_url=login_user)
 @csrf_protect
@@ -112,7 +119,7 @@ def chat_room(request, chat_room_id):
     chat_room = ChatRoom.objects.get(id=chat_room_id)
     messages = Message.objects.filter(chat_room_id=chat_room_id).order_by('timestamp')
     context = {'chat_room_id': chat_room_id, 'messages': messages}
-    return render(request, 'user/cha••••••t_room.html', context)
+    return render(request, 'user/chat_room.html', context)
 
 @login_required(login_url=login_user)
 @csrf_protect
@@ -164,6 +171,24 @@ def create_job_post(request):
             return HttpResponseRedirect(reverse("homepage"))
     return render(request, "user/job_create.html",{"job_form":job_form})
 
+@login_required(login_url=login_user)
+@csrf_protect
 def list_jobs(request):
     all_jobs=list(JobPost.objects.all())
+    if request.method == "POST":
+        pass
     return render(request,"user/list_jobs.html",{"job_list":all_jobs})
+    
+@login_required(login_url=login_user)
+def connect(request,user_id):
+    target_user=User.objects.get(user_id=user_id)
+    current_user=request.user
+    current_user.friendships.add(target_user)
+    return HttpResponseRedirect(reverse('list_jobs'))
+
+@login_required(login_url=login_user)
+def connected_list(request):
+    user=User.objects.get(user_id=request.user.user_id)
+    friends = user.friendships.all()
+
+    return render(request,"user/list_users.html",{"user_list":friends,"friends":friends,"connected":True})

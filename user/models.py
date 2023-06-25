@@ -5,6 +5,10 @@ from django.contrib.auth.models import AbstractUser
 def user_directory_path(instance, filename):
     return "user_{0}/{1}".format(instance.user.id, filename)
 
+class Company(models.Model):
+     company_id=models.AutoField(primary_key=True)
+     logo=models.ImageField(blank=True, null=True)
+
 class Job(models.Model):
     job_id=models.AutoField(primary_key=True)
     job_title=models.CharField(max_length=100)
@@ -28,6 +32,7 @@ class Posts(models.Model):
     post_type=models.CharField(max_length=20)
     images=ArrayField(models.ImageField(),blank=True,null=True)
     comment_id=ArrayField(models.IntegerField(),blank=True,null=True)
+    
 
 class Skills(models.Model):
     skill_id=models.AutoField(primary_key=True)
@@ -50,6 +55,7 @@ class User(AbstractUser):
     job_id=ArrayField(models.IntegerField(),default=list)
     skill_id = ArrayField(models.IntegerField(),default=list)
     project_id=ArrayField(models.IntegerField(),default=list)
+    friendships = models.ManyToManyField('self', through='Connection', symmetrical=False)
 
     def get_profile_url(self):
             try:
