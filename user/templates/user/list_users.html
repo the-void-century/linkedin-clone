@@ -51,7 +51,7 @@
         <div class="headline">{{ user.headline }}</div>
         {% if user in friends %}
         <div class="already-connected">
-            <a href="{% url 'connection' user.user_id %}">disconnect</a>
+            <a href="{% url 'disconnection' user.user_id %}">disconnect</a>
         </div>
         {% else %}
         <div class="not-connected">

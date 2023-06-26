@@ -20,6 +20,7 @@ urlpatterns = [
     path('job',views.create_job_post,name='create_job_post'),
     path('joblist',views.list_jobs,name='list_jobs'),
     path('connectWith/<int:user_id>',views.connect,name='connection'),
+    path('disconnectWith/<int:user_id>',views.disconnect,name='disconnection'),
     path('connectedPeople',views.connected_list,name='connectedPeople')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

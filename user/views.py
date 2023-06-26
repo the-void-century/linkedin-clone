@@ -184,7 +184,14 @@ def connect(request,user_id):
     target_user=User.objects.get(user_id=user_id)
     current_user=request.user
     current_user.friendships.add(target_user)
-    return HttpResponseRedirect(reverse('list_jobs'))
+    return HttpResponseRedirect(reverse('people'))
+
+@login_required(login_url=login_user)
+def disconnect(request,user_id):
+    target_user=User.objects.get(user_id=user_id)
+    current_user=request.user
+    current_user.friendships.remove(target_user)
+    return HttpResponseRedirect(reverse('people'))
 
 @login_required(login_url=login_user)
 def connected_list(request):
